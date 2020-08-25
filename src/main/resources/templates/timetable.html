@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Данные оплаты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <form action="/timetable" method="get">
+        <div class="form-group">
+            <input type='hidden' id='sessionId' name='sessionId' th:value='${sessionId}'>
+            <label for='date' class="control-label">Дата для перехода</label><br>
+            <input type='date' class="form-control" required="required" id='date' name='date' th:value='${date}'><br>
+        </div>
+        <input type='submit' class="btn btn-primary" value='Перейти'>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 th:text="${name}"></h1>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">Время</th>
+                <th scope="col">Предмет</th>
+                <th scope="col">Ученик</th>
+                <th scope="col">Учитель</th>
+                <th scope="col">Проведено</th>
+                <th scope="col">Дата создания</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${timetables.empty}">
+                <td colspan="2"> Нету занятий </td>
+            </tr>
+            <tr th:each="timetable : ${timetables}">
+                <th scope="row" th:text="${timetable.time}"></th>
+                <td><span th:text="${timetable.subject}"></span></td>
+                <td><span th:text="${timetable.pupil}"></span></td>
+                <td><span th:text="${timetable.teacher}"></span></td>
+                <td><span th:text="${timetable.isProcessed}"></span></td>
+                <td><span th:text="${timetable.dateOfCreate}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href="${previousUrl}" class="btn btn-primary">Предыдущий день</a>
+        <a th:href="${nextUrl}" class="btn btn-primary">Следующий день</a>
+    </div>
+</div>
+</body>
+</html>

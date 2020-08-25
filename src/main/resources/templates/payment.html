@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Данные оплаты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h1> Оплаты за месяц </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+
+        </div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">дата</th>
+                <th scope="col">ученик</th>
+                <th scope="col">сумма</th>
+                <th scope="col">предмет</th>
+                <th scope="col">как оплачено</th>
+                <th scope="col">добавлено</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${payments.empty}">
+                <td colspan="2"> Оплат нет </td>
+            </tr>
+            <tr th:each="payment : ${payments}">
+                <th scope="row" th:text="${payment.number}"></th>
+                <td><span th:text="${payment.date}"></span></td>
+                <td><span th:text="${payment.pupil}"></span></td>
+                <td><span th:text="${payment.amount}"></span></td>
+                <td><span th:text="${payment.subject}"></span></td>
+                <td><span th:text="${payment.howToPay}"></span></td>
+                <td><span th:text="${payment.added}"></span></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
